@@ -3,6 +3,7 @@ import ProductGrid from '../../components/ProductGrid';
 import { listProductsPublic } from '../../lib/server/productsService';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export default async function Home({ searchParams }) {
   const q = searchParams?.q || '';

@@ -1,16 +1,24 @@
 import Card from '../../../components/ui/Card';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 async function getData() {
-  const [prodsRes, ordersRes] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/vendedor/productos`, { cache: 'no-store' }),
-    fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/vendedor/pedidos`, { cache: 'no-store' })
-  ]);
-  const prods = prodsRes.ok ? await prodsRes.json() : { items: [] };
-  const orders = ordersRes.ok ? await ordersRes.json() : { items: [] };
-  const agotados = prods.items.filter((p) => p.stock <= 0 || !p.disponible).length;
-  const pendientes = orders.items.filter((o) => o.estado === 'pendiente').length;
-  return { totalProds: prods.items.length, agotados, pendientes };
+  try {
+    const [prodsRes, ordersRes] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/vendedor/productos`, { cache: 'no-store' }),
+      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/vendedor/pedidos`, { cache: 'no-store' })
+    ]);
+    const prods = prodsRes.ok ? await prodsRes.json() : { items: [] };
+    const orders = ordersRes.ok ? await ordersRes.json() : { items: [] };
+    const agotados = prods.items.filter((p) => p.stock <= 0 || !p.disponible).length;
+    const pendientes = orders.items.filter((o) => o.estado === 'pendiente').length;
+    return { totalProds: prods.items.length, agotados, pendientes };
+  } catch (error) {
+    console.error('Error loading dashboard data:', error);
+    return { totalProds: 0, agotados: 0, pendientes: 0 };
+  }
 }
 
 export default async function Dashboard() {
@@ -31,5 +39,3 @@ export default async function Dashboard() {
     </div>
   );
 }
-
-export const dynamic = 'force-dynamic';
