@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
+export const runtime = 'nodejs';
 import { VendorModel } from '../../../../lib/models/Vendor';
 import bcrypt from 'bcryptjs';
-import { signToken, setSellerCookie } from '../../../../lib/auth';
+import { signToken } from '../../../../lib/auth';
 
 export async function POST(req) {
   const { usuario, password } = await req.json();
@@ -29,6 +30,16 @@ export async function POST(req) {
   if (!ok || !identity) return NextResponse.json({ error: 'Usuario o contraseña incorrectos' }, { status: 401 });
 
   const token = signToken(identity);
-  setSellerCookie(token);
-  return NextResponse.json({ ok: true, vendedor: identity });
+  const res = NextResponse.json({ ok: true, vendedor: identity });
+  // Set cookie explicitly on response to ensure it is sent in all runtimes
+  res.cookies.set({
+    name: 'vendedor_token',
+    value: token,
+    httpOnly: true,
+    path: '/',
+    maxAge: 60 * 60 * 24 * 7,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production'
+  });
+  return res;
 }

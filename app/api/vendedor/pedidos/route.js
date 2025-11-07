@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const runtime = 'nodejs';
 import { OrderModel } from '../../../../lib/models/Order';
 import { getSellerFromCookie } from '../../../../lib/auth';
 

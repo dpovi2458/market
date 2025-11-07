@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const runtime = 'nodejs';
 import { ProductModel } from '../../../../lib/models/Product';
 import { z } from 'zod';
 

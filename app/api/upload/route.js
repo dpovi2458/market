@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const runtime = 'nodejs';
 import { v2 as cloudinary } from 'cloudinary';
 import { getSellerFromCookie } from '../../../lib/auth';
 
