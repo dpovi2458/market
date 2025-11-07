@@ -1,0 +1,16 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  experimental: {
+    serverActions: {
+      allowedOrigins: [process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000']
+    }
+  },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' }
+    ]
+  }
+};
+
+module.exports = nextConfig;

@@ -1,0 +1,7 @@
+{
+  "/api/pedidos/route": "app/api/pedidos/route.js",
+  "/(tienda)/page": "app/(tienda)/page.js",
+  "/(tienda)/producto/[id]/page": "app/(tienda)/producto/[id]/page.js",
+  "/(tienda)/carrito/page": "app/(tienda)/carrito/page.js",
+  "/(tienda)/pedido-exitoso/page": "app/(tienda)/pedido-exitoso/page.js"
+}

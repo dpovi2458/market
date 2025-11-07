@@ -1,0 +1,35 @@
+{
+  "pages": {
+    "/(tienda)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(tienda)/page.js"
+    ],
+    "/(tienda)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(tienda)/layout.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/(tienda)/producto/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(tienda)/producto/[id]/page.js"
+    ],
+    "/(tienda)/carrito/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(tienda)/carrito/page.js"
+    ],
+    "/(tienda)/pedido-exitoso/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(tienda)/pedido-exitoso/page.js"
+    ]
+  }
+}
