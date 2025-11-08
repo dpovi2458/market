@@ -12,15 +12,37 @@ export default function Navbar() {
   const isSeller = pathname?.startsWith('/vendedor');
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b-2 border-gray-200 shadow-sm">
+    <header 
+      className="sticky top-0 z-40 border-b-2 shadow-sm"
+      style={{
+        background: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderColor: '#C3DEE0'
+      }}
+    >
       <div className="container flex items-center justify-between py-4 gap-4">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="bg-primary p-2 rounded-lg shadow-md group-hover:shadow-lg transition-all">
+          <div 
+            className="p-2.5 rounded-[10px] shadow-md group-hover:shadow-lg transition-all"
+            style={{
+              background: 'linear-gradient(135deg, #0F7B85 0%, #0B5C63 100%)',
+            }}
+          >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </div>
-          <span className="text-xl font-bold text-primary">
+          <span 
+            className="text-xl font-bold"
+            style={{
+              fontFamily: 'Lexend, system-ui, sans-serif',
+              background: 'linear-gradient(135deg, #0F7B85 0%, #0B5C63 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
+          >
             Market Facultad
           </span>
         </Link>
@@ -50,7 +72,11 @@ export default function Navbar() {
           )}
           <Link 
             href="/vendedor/login" 
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary hover:bg-gray-100 rounded-lg transition-all min-h-[48px]"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-[10px] transition-all min-h-[48px]"
+            style={{
+              color: '#0B5C63',
+              fontFamily: 'Lexend, system-ui, sans-serif'
+            }}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

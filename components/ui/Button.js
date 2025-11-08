@@ -1,18 +1,21 @@
 export default function Button({ children, className = '', loading = false, variant = 'primary', ...props }) {
-  const baseStyles = 'inline-flex items-center justify-center min-h-[44px] px-6 py-2.5 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-95';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[10px] font-semibold transition-all duration-300 focus:outline-none focus:ring-[3px] focus:ring-[#94c2ff] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-98 min-h-[48px]';
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary/90 focus:ring-primary shadow-sm hover:shadow-md',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-400',
-    danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 shadow-sm hover:shadow-md',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary'
+    primary: 'bg-gradient-to-br from-[#0F7B85] to-[#0B5C63] text-white hover:from-[#0B5C63] hover:to-[#073D42] shadow-[0_2px_4px_rgba(15,123,133,0.08)] hover:shadow-[0_4px_12px_rgba(15,123,133,0.12)] hover:-translate-y-0.5',
+    secondary: 'bg-white text-[#031E21] border-2 border-[#87BDC2] hover:bg-[#EBF4F4] hover:border-[#0F7B85] hover:text-[#0B5C63]',
+    danger: 'bg-red-500 text-white hover:bg-red-600 shadow-sm hover:shadow-md',
+    outline: 'border-2 border-[#0F7B85] text-[#0F7B85] hover:bg-[#0F7B85] hover:text-white'
   };
+
+  const variantClass = variants[variant] || variants.primary;
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      className={`${baseStyles} ${variantClass} ${className}`}
       disabled={loading || props.disabled}
       {...props}
+      style={{ fontFamily: 'Lexend, system-ui, sans-serif' }}
     >
       {loading && (
         <svg className="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

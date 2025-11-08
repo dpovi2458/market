@@ -14,7 +14,9 @@ export default function CarritoPage() {
   const [errors, setErrors] = useState({});
   const router = useRouter();
 
-  const total = items.reduce((sum, it) => sum + it.precio * it.cantidad, 0);
+  const subtotal = items.reduce((sum, it) => sum + it.precio * it.cantidad, 0);
+  const envio = 0; // Puedes calcular el envío aquí si aplica
+  const total = subtotal + envio;
 
   function validate() {
     const e = {};
@@ -48,57 +50,205 @@ export default function CarritoPage() {
     }
   }
 
+  if (items.length === 0 && step === 1) {
+    return (
+      <div className="container" style={{ paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-12)' }}>
+        <div className="cart-empty">
+          <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--text-muted)' }}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <h2 style={{ 
+            fontFamily: 'var(--font-primary)', 
+            fontSize: 'var(--text-2xl)', 
+            fontWeight: 'var(--weight-semibold)',
+            color: 'var(--text-primary)',
+            marginTop: 'var(--space-6)'
+          }}>Tu carrito está vacío</h2>
+          <p style={{ color: 'var(--text-secondary)', marginTop: 'var(--space-2)' }}>
+            Explora nuestros productos y encuentra lo que necesitas
+          </p>
+          <Button 
+            variant="primary" 
+            onClick={() => router.push('/')}
+            style={{ marginTop: 'var(--space-8)' }}
+          >
+            Ver productos
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <h1 className="text-xl font-semibold mb-4">Tu pedido</h1>
+    <div className="container" style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-12)' }}>
+      <h1 style={{ 
+        fontFamily: 'var(--font-primary)', 
+        fontSize: 'var(--text-3xl)', 
+        fontWeight: 'var(--weight-bold)',
+        color: 'var(--text-primary)',
+        marginBottom: 'var(--space-6)'
+      }}>
+        {step === 1 ? 'Carrito de compras' : 'Información de contacto'}
+      </h1>
+      
       <Steps step={step} />
-      {step === 1 && (
-        <div className="space-y-4 mt-4">
-          {items.length === 0 && <p className="text-gray-600">No hay productos en el carrito.</p>}
-          <ul className="divide-y bg-white rounded-xl border">
-            {items.map((it) => (
-              <li key={it.producto_id} className="p-3 flex gap-3 items-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                {it.imagen && <img src={it.imagen} alt={it.titulo} className="w-16 h-16 object-cover rounded" />}
-                <div className="flex-1">
-                  <p className="font-medium">{it.titulo}</p>
-                  <p className="text-sm text-gray-600">S/ {it.precio.toFixed(2)}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <button className="px-2 py-1 border rounded" onClick={() => updateCantidad(it.producto_id, Math.max(1, it.cantidad - 1))}>-</button>
-                    <span>{it.cantidad}</span>
-                    <button className="px-2 py-1 border rounded" onClick={() => updateCantidad(it.producto_id, Math.min(it.stock ?? 99, it.cantidad + 1))}>+</button>
-                    <button className="ml-3 text-danger text-sm" onClick={() => removeItem(it.producto_id)}>Eliminar</button>
-                  </div>
-                </div>
-                <div className="font-semibold">S/ {(it.precio * it.cantidad).toFixed(2)}</div>
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center justify-between">
-            <span className="font-semibold">Total</span>
-            <span className="text-lg font-semibold">S/ {total.toFixed(2)}</span>
-          </div>
-          <Button onClick={() => setStep(2)} disabled={items.length === 0}>Proceder a pedir</Button>
-        </div>
-      )}
 
-      {step === 2 && (
-        <div className="bg-white rounded-xl p-4 border mt-4 space-y-3">
-          <Input label="Nombre completo*" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} error={errors.nombre} />
-          <Input label="WhatsApp/Teléfono*" value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} error={errors.telefono} />
-          <Input label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-          <Input label="Punto de entrega*" value={form.punto_entrega} onChange={(e) => setForm({ ...form, punto_entrega: e.target.value })} error={errors.punto_entrega} />
-          <label className="block">
-            <span className="block text-sm font-medium text-gray-700 mb-1">Comentarios adicionales</span>
-            <textarea className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" rows={3} value={form.comentarios} onChange={(e) => setForm({ ...form, comentarios: e.target.value })} />
-          </label>
-          <div className="flex gap-2 pt-2">
-            <Button className="bg-gray-100 text-gray-800 hover:bg-gray-200" onClick={() => setStep(1)}>Volver</Button>
-            <Button loading={loading} onClick={submit}>Confirmar pedido</Button>
-          </div>
+      <section className="cart-page">
+        {/* Columna izquierda: Lista de productos o formulario */}
+        <div className="cart-list">
+          {step === 1 && (
+            <>
+              <ul className="cart-items-list">
+                {items.map((it) => (
+                  <li key={it.producto_id} className="cart-item-row">
+                    {it.imagen && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={it.imagen} alt={it.titulo} className="cart-item-image" />
+                    )}
+                    <div className="cart-item-info">
+                      <h3 className="cart-item-title">{it.titulo}</h3>
+                      <p className="cart-item-unit-price">S/ {it.precio.toFixed(2)} c/u</p>
+                      <div className="cart-item-actions">
+                        <div className="qty-control">
+                          <button 
+                            onClick={() => updateCantidad(it.producto_id, Math.max(1, it.cantidad - 1))}
+                            aria-label="Disminuir cantidad"
+                          >
+                            −
+                          </button>
+                          <span>{it.cantidad}</span>
+                          <button 
+                            onClick={() => updateCantidad(it.producto_id, Math.min(it.stock ?? 99, it.cantidad + 1))}
+                            aria-label="Aumentar cantidad"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <button 
+                          className="cart-item-remove-btn"
+                          onClick={() => removeItem(it.producto_id)}
+                          aria-label="Eliminar producto"
+                        >
+                          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                          Eliminar
+                        </button>
+                      </div>
+                    </div>
+                    <div className="cart-item-subtotal">
+                      S/ {(it.precio * it.cantidad).toFixed(2)}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {step === 2 && (
+            <div className="checkout-form">
+              <Input 
+                label="Nombre completo*" 
+                value={form.nombre} 
+                onChange={(e) => setForm({ ...form, nombre: e.target.value })} 
+                error={errors.nombre} 
+              />
+              <Input 
+                label="WhatsApp/Teléfono*" 
+                value={form.telefono} 
+                onChange={(e) => setForm({ ...form, telefono: e.target.value })} 
+                error={errors.telefono} 
+              />
+              <Input 
+                label="Email" 
+                type="email" 
+                value={form.email} 
+                onChange={(e) => setForm({ ...form, email: e.target.value })} 
+              />
+              <Input 
+                label="Punto de entrega*" 
+                value={form.punto_entrega} 
+                onChange={(e) => setForm({ ...form, punto_entrega: e.target.value })} 
+                error={errors.punto_entrega} 
+              />
+              <label className="form-field">
+                <span className="form-label">Comentarios adicionales</span>
+                <textarea 
+                  className="form-textarea" 
+                  rows={4} 
+                  value={form.comentarios} 
+                  onChange={(e) => setForm({ ...form, comentarios: e.target.value })}
+                  placeholder="Instrucciones especiales, preferencias de entrega, etc."
+                />
+              </label>
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Columna derecha: Resumen del pedido (sticky) */}
+        <aside className="order-summary">
+          <h4 style={{
+            fontFamily: 'var(--font-primary)',
+            fontSize: 'var(--text-xl)',
+            fontWeight: 'var(--weight-semibold)',
+            color: 'var(--text-primary)',
+            marginBottom: 'var(--space-6)'
+          }}>Resumen del pedido</h4>
+          
+          <dl className="totals">
+            <div className="totals-row">
+              <dt>Subtotal ({items.length} {items.length === 1 ? 'producto' : 'productos'})</dt>
+              <dd>S/ {subtotal.toFixed(2)}</dd>
+            </div>
+            <div className="totals-row">
+              <dt>Envío</dt>
+              <dd>{envio === 0 ? 'Por coordinar' : `S/ ${envio.toFixed(2)}`}</dd>
+            </div>
+            <div className="totals-row grand">
+              <dt>Total</dt>
+              <dd>S/ {total.toFixed(2)}</dd>
+            </div>
+          </dl>
+
+          {step === 1 && (
+            <Button 
+              variant="primary" 
+              onClick={() => setStep(2)} 
+              disabled={items.length === 0}
+              style={{ width: '100%', marginTop: 'var(--space-6)' }}
+            >
+              Continuar con el pedido
+            </Button>
+          )}
+
+          {step === 2 && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginTop: 'var(--space-6)' }}>
+              <Button 
+                variant="primary" 
+                loading={loading} 
+                onClick={submit}
+                style={{ width: '100%' }}
+              >
+                {loading ? 'Procesando...' : 'Confirmar pedido'}
+              </Button>
+              <Button 
+                variant="secondary" 
+                onClick={() => setStep(1)}
+                style={{ width: '100%' }}
+              >
+                Volver al carrito
+              </Button>
+            </div>
+          )}
+
+          <div className="order-summary-note">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <p>Los productos serán reservados hasta que coordines la entrega con el vendedor.</p>
+          </div>
+        </aside>
+      </section>
     </div>
   );
 }
@@ -106,12 +256,16 @@ export default function CarritoPage() {
 function Steps({ step }) {
   const steps = ['Revisar carrito', 'Datos de contacto'];
   return (
-    <div className="flex items-center gap-3 text-sm">
+    <div className="checkout-steps">
       {steps.map((s, i) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs ${i + 1 <= step ? 'bg-primary' : 'bg-gray-300'}`}>{i + 1}</span>
-          <span className={`${i + 1 === step ? 'font-semibold' : 'text-gray-600'}`}>{s}</span>
-          {i < steps.length - 1 && <span className="text-gray-400">/</span>}
+        <div key={i} className="step-item">
+          <span className={`step-number ${i + 1 <= step ? 'active' : ''}`}>
+            {i + 1}
+          </span>
+          <span className={`step-label ${i + 1 === step ? 'current' : ''}`}>
+            {s}
+          </span>
+          {i < steps.length - 1 && <span className="step-divider">/</span>}
         </div>
       ))}
     </div>
