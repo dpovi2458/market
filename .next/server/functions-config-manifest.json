@@ -1,0 +1,1 @@
+{"version":1,"functions":{"/api/health":{},"/api/productos/[id]":{},"/api/pedidos":{},"/api/test-cloudinary":{},"/api/upload":{},"/api/vendedor/productos":{},"/api/vendedor/login":{},"/api/productos":{},"/api/vendedor/session":{},"/favicon.ico":{},"/api/vendedor/pedidos":{},"/":{},"/producto/[id]":{},"/vendedor/dashboard":{},"/vendedor/productos/editar/[id]":{}}}
