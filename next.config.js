@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     serverActions: {
-      allowedOrigins: [process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000']
+      allowedOrigins: ['market-six-teal.vercel.app', 'localhost:3000']
     }
   },
   images: {
