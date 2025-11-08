@@ -20,10 +20,24 @@ export default function ProductForm({ initial = {}, onSaved }) {
   async function upload(file) {
     const form = new FormData();
     form.append('file', file);
-    const res = await fetch('/api/upload', { method: 'POST', body: form });
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.error || 'Error al subir');
-    return json.url;
+    try {
+      const res = await fetch('/api/upload', { method: 'POST', body: form });
+      
+      // Check content type before parsing
+      const contentType = res.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await res.text();
+        console.error('Server returned non-JSON response:', text.substring(0, 200));
+        throw new Error('Error del servidor al procesar la imagen');
+      }
+      
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Error al subir imagen');
+      return json.url;
+    } catch (err) {
+      console.error('Upload error:', err);
+      throw new Error(err.message || 'Error al subir imagen. Verifica tu conexión.');
+    }
   }
 
   async function submit(e) {
