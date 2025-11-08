@@ -26,15 +26,12 @@ export default async function Home({ searchParams }) {
               Encuentra productos, servicios y gestiona tus trámites universitarios en un solo lugar.
             </p>
             <div className="banner-actions">
-              <button 
-                className="btn-hero-primary"
-                onClick={() => document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' })}
-              >
+              <a href="#productos" className="btn-hero-primary">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
                 Explorar productos
-              </button>
+              </a>
               <Link href="/vendedor/login" className="btn-hero-secondary">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
