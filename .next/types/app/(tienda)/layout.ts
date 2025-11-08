@@ -1,4 +1,4 @@
-// File: C:\Users\dpovi\Unimarket\marketplace-facultad\app\(tienda)\layout.js
+// File: c:\Users\dpovi\Unimarket\marketplace-facultad\app\(tienda)\layout.js
 import * as entry from '../../../../app/(tienda)/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

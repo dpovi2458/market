@@ -1,4 +1,4 @@
-// File: C:\Users\dpovi\Unimarket\marketplace-facultad\app\favicon.ico\route.js
+// File: c:\Users\dpovi\Unimarket\marketplace-facultad\app\favicon.ico\route.js
 import * as entry from '../../../../app/favicon.ico/route.js'
 import type { NextRequest } from 'next/server.js'
 

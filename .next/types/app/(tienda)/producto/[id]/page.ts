@@ -1,4 +1,4 @@
-// File: C:\Users\dpovi\Unimarket\marketplace-facultad\app\(tienda)\producto\[id]\page.js
+// File: c:\Users\dpovi\Unimarket\marketplace-facultad\app\(tienda)\producto\[id]\page.js
 import * as entry from '../../../../../../app/(tienda)/producto/[id]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

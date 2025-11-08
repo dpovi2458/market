@@ -1,4 +1,4 @@
-// File: C:\Users\dpovi\Unimarket\marketplace-facultad\app\vendedor\login\page.js
+// File: c:\Users\dpovi\Unimarket\marketplace-facultad\app\vendedor\login\page.js
 import * as entry from '../../../../../app/vendedor/login/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
