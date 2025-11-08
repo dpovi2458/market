@@ -1,7 +1,4 @@
 {
   "/(tienda)/page": "app/(tienda)/page.js",
-  "/vendedor/login/page": "app/vendedor/login/page.js",
-  "/vendedor/dashboard/page": "app/vendedor/dashboard/page.js",
-  "/vendedor/pedidos/page": "app/vendedor/pedidos/page.js",
   "/(tienda)/producto/[id]/page": "app/(tienda)/producto/[id]/page.js"
 }
