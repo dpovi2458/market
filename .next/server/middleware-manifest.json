@@ -10,26 +10,15 @@
       "page": "/",
       "matchers": [
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/vendedor\\/dashboard(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
-          "originalSource": "/vendedor/dashboard/:path*"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/vendedor\\/productos(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
-          "originalSource": "/vendedor/productos/:path*"
-        },
-        {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/vendedor\\/pedidos(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
-          "originalSource": "/vendedor/pedidos/:path*"
+          "regexp": "^/.*$",
+          "originalSource": "/:path*"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "HCX3DoTJ6XM5bokeQ1YPR",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "36iTs4cjBKl1Xkoide2w9FQ2c4lE6rPQCmKffa+xVKM=",
-        "__NEXT_PREVIEW_MODE_ID": "b590a537f9c477c5d2a220f862dad265",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "b423d75c24a2eda7041b8d7e74dc84cebd7221d0516f5f91daadefaa34ee062e",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "7e85a420434fc25f05b62354f028519938248f0e1e83f430702695253f0a1c1e"
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "SukNDxtEe5iuCx4hBp2H/ly5glhZucaFsljNwwMCGmg="
       }
     }
   },

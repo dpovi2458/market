@@ -1,4 +1,4 @@
-// File: c:\Users\dpovi\Unimarket\marketplace-facultad\app\api\vendedor\pedidos\route.js
+// File: C:\Users\dpovi\Unimarket\marketplace-facultad\app\api\vendedor\pedidos\route.js
 import * as entry from '../../../../../../app/api/vendedor/pedidos/route.js'
 import type { NextRequest } from 'next/server.js'
 
