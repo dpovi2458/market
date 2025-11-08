@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { useCloudinaryUpload } from '../../hooks/useCloudinaryUpload';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
 
@@ -15,35 +16,8 @@ export default function ProductForm({ initial = {}, onSaved }) {
     ...initial
   });
   const [loading, setLoading] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const { uploadImage, uploading, progress } = useCloudinaryUpload();
   const [error, setError] = useState('');
-
-  async function uploadToServer(file) {
-    setUploading(true);
-    setError('');
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({ error: 'Error desconocido' }));
-        throw new Error(errorData.error || 'Error al subir imagen');
-      }
-
-      const data = await res.json();
-      return data.url;
-    } catch (err) {
-      console.error('Upload error:', err);
-      throw err;
-    } finally {
-      setUploading(false);
-    }
-  }
 
   async function handleImageUpload(file) {
     if (!file) return;
@@ -60,7 +34,7 @@ export default function ProductForm({ initial = {}, onSaved }) {
     }
 
     try {
-      const url = await uploadToServer(file);
+      const url = await uploadImage(file);
       setData((d) => ({ ...d, imagenes: [...(d.imagenes || []), url].slice(0, 3) }));
     } catch (err) {
       setError(err.message || 'Error al subir imagen. Intenta de nuevo.');
@@ -125,7 +99,7 @@ export default function ProductForm({ initial = {}, onSaved }) {
         />
         {uploading && (
           <div className="mt-2">
-            <p className="text-sm text-primary">Subiendo imagen...</p>
+            <p className="text-sm text-primary">Subiendo imagen... {progress}%</p>
           </div>
         )}
         <div className="flex gap-2 mt-2 flex-wrap">
