@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { ProductModel } from '../../../../lib/models/Product';
-import Button from '../../../../components/ui/Button';
 import { AddToCart } from './ui';
 
 export const dynamic = 'force-dynamic';
@@ -14,25 +13,28 @@ export default async function ProductDetail({ params }) {
     const json = JSON.parse(JSON.stringify(product));
 
     return (
-      <div className="grid md:grid-cols-2 gap-6">
-        <div>
-          {/* Carousel simple */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={json.imagenes?.[0] || '/placeholder.png'} alt={json.titulo} className="w-full rounded-xl object-cover aspect-square" />
-          {json.imagenes?.length > 1 && (
-            <div className="flex gap-2 mt-2">
-              {json.imagenes.map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={i} src={src} alt="mini" className="w-16 h-16 object-cover rounded" />
-              ))}
-            </div>
-          )}
+      <div className="product-layout">
+        <div className="image-section">
+          <div className="product-image-container">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={json.imagenes?.[0] || 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80'} alt={json.titulo} className="product-image" />
+          </div>
         </div>
-        <div className="space-y-3">
-          <h1 className="text-2xl font-semibold">{json.titulo}</h1>
-          <p className="text-gray-700">{json.descripcion}</p>
-          <p className="text-2xl text-primary font-bold">S/ {json.precio.toFixed(2)}</p>
-          <p className="text-sm text-gray-600">Vendedor: {json.vendedor_nombre || 'Estudiante'}</p>
+        <div className="info-section">
+          <div>
+            <h1 className="product-title">{json.titulo}</h1>
+            <p className="product-description">{json.descripcion}</p>
+          </div>
+          <div className="price-container">
+            <div className="price">
+              <span className="price-currency">S/</span>
+              <span>{json.precio.toFixed(2)}</span>
+            </div>
+          </div>
+          <div className="vendor-section">
+            <div className="vendor-label">Vendedor</div>
+            <div className="vendor-name">{json.vendedor_nombre || 'Estudiante'}</div>
+          </div>
           <AddToCart product={json} />
         </div>
       </div>

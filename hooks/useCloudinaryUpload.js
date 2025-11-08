@@ -8,23 +8,26 @@ import { useState } from 'react';
 export function useCloudinaryUpload() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const presetFromEnv = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
   const uploadImage = async (file) => {
     if (!file) throw new Error('No file provided');
 
-    // Validaciones en el cliente
+    // Validaciones básicas
     if (!file.type.startsWith('image/')) {
       throw new Error('Solo se permiten imágenes');
     }
-
     if (file.size > 5 * 1024 * 1024) {
       throw new Error('La imagen no debe superar 5MB');
     }
-
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-
     if (!cloudName) {
-      throw new Error('Cloudinary no está configurado. Falta NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME');
+      throw new Error('Falta NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME');
+    }
+
+    // Requerimos un preset unsigned explícito para evitar confusión
+    if (!presetFromEnv) {
+      throw new Error('Falta NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET (crea un preset UNSIGNED en Cloudinary)');
     }
 
     setUploading(true);
@@ -33,41 +36,40 @@ export function useCloudinaryUpload() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      // Usa upload_preset si existe, sino Cloudinary usará el preset por defecto
-      const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-      if (uploadPreset) {
-        formData.append('upload_preset', uploadPreset);
-      } else {
-        // Fallback: usa el preset unsigned por defecto
-        // Cloudinary automáticamente permite uploads unsigned si está habilitado
-        formData.append('upload_preset', 'ml_default');
-      }
+      formData.append('upload_preset', presetFromEnv);
 
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
+      const endpoint = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+      const response = await fetch(endpoint, { method: 'POST', body: formData });
 
-      setUploading(false);
+      // Intentar leer JSON aunque falle
+      let payload = null;
+      try { payload = await response.json(); } catch { /* swallow */ }
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        console.error('Cloudinary error:', errorData);
-        throw new Error(errorData?.error?.message || 'Error al subir imagen a Cloudinary');
+        const apiMessage = payload?.error?.message;
+        // Mensajes específicos para guiar solución
+        if (apiMessage?.toLowerCase().includes('upload preset')) {
+          throw new Error(`Cloudinary: preset '${presetFromEnv}' no encontrado o no es UNSIGNED. Verifica en Console → Settings → Upload → Upload Presets.`);
+        }
+        if (apiMessage?.toLowerCase().includes('unsigned')) {
+          throw new Error(`Cloudinary: el preset '${presetFromEnv}' no está en modo Unsigned.`);
+        }
+        throw new Error(apiMessage || 'Error al subir imagen a Cloudinary');
       }
 
-      const data = await response.json();
+      // Éxito
       setProgress(100);
-      return data.secure_url;
-    } catch (error) {
+      if (!payload?.secure_url) {
+        throw new Error('Respuesta de Cloudinary sin secure_url');
+      }
+      return payload.secure_url;
+    } catch (err) {
+      console.error('[uploadImage] error:', err);
+      throw err;
+    } finally {
       setUploading(false);
-      console.error('Upload error:', error);
-      throw error;
     }
   };
 
-  return { uploadImage, uploading, progress };
+  return { uploadImage, uploading, progress, cloudName, preset: presetFromEnv };
 }

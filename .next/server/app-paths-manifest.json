@@ -1,9 +1,6 @@
 {
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/api/vendedor/login/route": "app/api/vendedor/login/route.js",
-  "/api/upload/route": "app/api/upload/route.js",
   "/vendedor/login/page": "app/vendedor/login/page.js",
-  "/(tienda)/page": "app/(tienda)/page.js",
   "/vendedor/dashboard/page": "app/vendedor/dashboard/page.js",
-  "/vendedor/productos/nuevo/page": "app/vendedor/productos/nuevo/page.js"
+  "/vendedor/productos/nuevo/page": "app/vendedor/productos/nuevo/page.js",
+  "/vendedor/productos/page": "app/vendedor/productos/page.js"
 }
