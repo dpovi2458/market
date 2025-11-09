@@ -7,12 +7,16 @@ export function AddToCart({ product }) {
   const { addItem, setOpen } = useCarrito();
   const can = Math.max(0, product.stock || 0);
   const [showNotif, setShowNotif] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   function handleAdd() {
+    if (adding || can === 0) return;
+    setAdding(true);
     addItem({ producto_id: product._id, titulo: product.titulo, precio: product.precio, cantidad: qty, imagen: product.imagenes?.[0], stock: product.stock, vendedor_id: product.vendedor_id });
     setShowNotif(true);
     setTimeout(() => setShowNotif(false), 3000);
     setOpen(true);
+    setTimeout(() => setAdding(false), 300); // pequeña ventana anti-doble click
   }
 
   return (
@@ -32,8 +36,8 @@ export function AddToCart({ product }) {
           </div>
         </div>
       </div>
-      <button className="add-to-cart" onClick={handleAdd} disabled={can === 0}>
-        {can === 0 ? 'Sin stock' : 'Agregar al carrito'}
+      <button className="add-to-cart" onClick={handleAdd} disabled={can === 0 || adding}>
+        {can === 0 ? 'Sin stock' : (adding ? 'Agregando...' : 'Agregar al carrito')}
       </button>
       {showNotif && (
         <div className="notification show">

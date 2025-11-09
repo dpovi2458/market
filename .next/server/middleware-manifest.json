@@ -1,6 +1,40 @@
 {
   "version": 3,
-  "middleware": {},
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge-runtime-webpack.js",
+        "server/middleware.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "matchers": [
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/vendedor\\/dashboard(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/vendedor/dashboard/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/vendedor\\/productos(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/vendedor/productos/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/vendedor\\/pedidos(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/vendedor/pedidos/:path*"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "4Bky9ccaXenVTJ3xIkMez",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "N+5ynd+1Zza5xb8mjxmJpb+WvfOb+0LAGFl10+21N4I=",
+        "__NEXT_PREVIEW_MODE_ID": "8fd84fa48ca7bfe598ebb1c18c09124d",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "891e5d4cbc3b47edb48b84b5cb4acb09b45cc1b35d776ae976fd436bfedad4db",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "a4f4f4ea51cb0018c2273c6600427c1281eefdae8518809e3eb97068d21ec486"
+      }
+    }
+  },
   "functions": {},
-  "sortedMiddleware": []
+  "sortedMiddleware": [
+    "/"
+  ]
 }

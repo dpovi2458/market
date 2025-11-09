@@ -71,15 +71,30 @@ async function main() {
     'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1520975922329-6c237c2b5e09?w=800&q=80&auto=format&fit=crop'
   ];
-  for (let i = 1; i <= 10; i++) {
+
+  const products = [
+    { titulo: 'Cuaderno A4 150 hojas', desc: 'Cuaderno rayado de calidad para apuntes', precio: 12.50, cat: 'utiles', stock: 15 },
+    { titulo: 'Bolígrafo Set 5 colores', desc: 'Set de bolígrafos de punta fina', precio: 8.00, cat: 'utiles', stock: 20 },
+    { titulo: 'Pizza Margarita', desc: 'Pizza casera deliciosa, entrega a domicilio', precio: 18.00, cat: 'comida', stock: 5 },
+    { titulo: 'Café Premium 1kg', desc: 'Granos de café importados molidos', precio: 35.00, cat: 'comida', stock: 8 },
+    { titulo: 'Cable USB-C', desc: 'Cable de carga rápida 2 metros', precio: 22.00, cat: 'tecnologia', stock: 12 },
+    { titulo: 'Protector pantalla vidrio templado', desc: 'Protector para smartphone con instalación', precio: 15.00, cat: 'tecnologia', stock: 18 },
+    { titulo: 'Polerón oversize gris', desc: 'Polerón cómodo para estudiantes', precio: 65.00, cat: 'ropa', stock: 10 },
+    { titulo: 'Mochila de tela resistente', desc: 'Mochila básica azul con compartimentos', precio: 45.00, cat: 'ropa', stock: 6 },
+    { titulo: 'Energizante bebida 250ml', desc: 'Bebida energética sin azúcar', precio: 7.50, cat: 'comida', stock: 25 },
+    { titulo: 'Auriculares Bluetooth', desc: 'Auriculares inalámbricos con 20h batería', precio: 89.00, cat: 'tecnologia', stock: 7 }
+  ];
+
+  for (let i = 0; i < products.length; i++) {
     const v = vendors[i % vendors.length];
+    const p = products[i];
     await Product.create({
-      titulo: `Producto ${i}`,
-      descripcion: 'Descripción breve del producto de ejemplo para el marketplace.',
-      precio: 5 * i,
-      categoria: categories[i % categories.length],
+      titulo: p.titulo,
+      descripcion: p.desc,
+      precio: p.precio,
+      categoria: p.cat,
       imagenes: [sampleImgs[i % sampleImgs.length]],
-      stock: 5 + (i % 10),
+      stock: p.stock,
       disponible: true,
       vendedor_id: String(v._id),
       vendedor_nombre: v.nombre

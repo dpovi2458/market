@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useReducer, useState, useRef } from 'react';
 
 const CarritoContext = createContext();
 
@@ -46,18 +46,45 @@ export function CarritoProvider({ children }) {
     } catch {}
   }, [items]);
 
-  const api = useMemo(
-    () => ({
+  // Anti doble-click / doble-dispatch rápido: almacena últimos añadidos por 300ms
+  const recentAddsRef = useRef(new Map());
+
+  const api = useMemo(() => {
+    const addItem = (item) => {
+      if (!item || !item.producto_id) return;
+      const now = Date.now();
+      const last = recentAddsRef.current.get(item.producto_id);
+      // Si se intentó agregar exactamente el mismo producto dentro de 300ms, ignorar
+      if (last && now - last < 300) return;
+      recentAddsRef.current.set(item.producto_id, now);
+      dispatch({ type: 'ADD', payload: { ...item, cantidad: Math.max(1, item.cantidad || 1) } });
+    };
+
+    return {
       items,
       open,
       setOpen,
-      addItem: (item) => dispatch({ type: 'ADD', payload: item }),
+      addItem,
       updateCantidad: (id, cantidad) => dispatch({ type: 'UPDATE_QTY', id, cantidad }),
       removeItem: (id) => dispatch({ type: 'REMOVE', id }),
-      clear: () => dispatch({ type: 'CLEAR' })
-    }),
-    [items, open]
-  );
+      clear: () => dispatch({ type: 'CLEAR' }),
+      totalItems: items.reduce((sum, item) => sum + item.cantidad, 0),
+      totalPrice: items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0),
+      increaseQuantity: (id) => {
+        const item = items.find(it => it.producto_id === id);
+        if (item) {
+          const newQty = Math.min((item.stock ?? 99), item.cantidad + 1);
+          dispatch({ type: 'UPDATE_QTY', id, cantidad: newQty });
+        }
+      },
+      decreaseQuantity: (id) => {
+        const item = items.find(it => it.producto_id === id);
+        if (item && item.cantidad > 1) {
+          dispatch({ type: 'UPDATE_QTY', id, cantidad: item.cantidad - 1 });
+        }
+      }
+    };
+  }, [items, open]);
 
   return <CarritoContext.Provider value={api}>{children}</CarritoContext.Provider>;
 }

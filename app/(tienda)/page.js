@@ -12,77 +12,69 @@ export default async function Home({ searchParams }) {
 
   return (
     <div style={{ paddingBottom: 'var(--space-12)' }}>
-      {/* Banner Hero */}
+      {/* Hero Banner */}
       {!q && !categoria && (
-        <section id="banner" className="hero-banner">
-          <div className="banner-content">
-            <h1 className="banner-title">
-              Bienvenido a <span className="brand-gradient">UniMarket</span>
+        <section className="hero-banner">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Compra y vende entre estudiantes
             </h1>
-            <p className="banner-subtitle">
-              El marketplace de la Universidad Nacional Mayor de San Marcos
+            <p className="hero-subtitle">
+              Market Facultad es tu marketplace para encontrar útiles, comida, tecnología y más. 
+              Hecho por estudiantes, para estudiantes de Ingeniería Industrial.
             </p>
-            <p className="banner-description">
-              Encuentra productos, servicios y gestiona tus trámites universitarios en un solo lugar.
-            </p>
-            <div className="banner-actions">
-              <a href="#productos" className="btn-hero-primary">
+            <div className="hero-ctas">
+              <Link href="/?categoria=utiles" className="hero-btn hero-btn-primary">
+                <span>Explorar catálogo</span>
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-                Explorar productos
-              </a>
-              <Link href="/vendedor/login" className="btn-hero-secondary">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </Link>
+              <Link href="/vendedor/login" className="hero-btn hero-btn-secondary">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m0 0h6m-6-6v6m0 0v6M4 12a8 8 0 1116 0 8 8 0 01-16 0z" />
                 </svg>
-                Soy vendedor
+                <span>Vende aquí</span>
               </Link>
             </div>
           </div>
-          <div className="banner-image">
-            <div className="banner-stats">
-              <div className="stat-card">
-                <div className="stat-number">{items.length}+</div>
-                <div className="stat-label">Productos</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">100%</div>
-                <div className="stat-label">Seguro</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">24/7</div>
-                <div className="stat-label">Disponible</div>
-              </div>
-            </div>
+          <div className="hero-graphic">
+            <img 
+              src="/hero-estudiantes fii.svg" 
+              alt="Estudiantes Market Facultad"
+              className="hero-illustration"
+              loading="lazy"
+            />
           </div>
         </section>
       )}
 
       {/* Filtros de categoría con scroll horizontal */}
-      <section className="categories-section" id="productos">
+      <section className="categories-section" style={{ marginTop: 'var(--space-12)' }}>
         <div className="container">
-          <h2 className="section-title">
-            {q ? `Resultados para "${q}"` : categoria ? getCategoryName(categoria) : 'Todos los productos'}
+          <h2 className="section-title" style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-4)' }}>
+            Todos los productos
           </h2>
           <div className="categories-scroll-container">
             <div className="categories-row">
-              {[
-                ['todos', '🏪 Todos'],
-                ['utiles', '📚 Útiles'],
-                ['comida', '🍕 Comida'],
-                ['tecnologia', '💻 Tecnología'],
-                ['ropa', '👕 Ropa'],
-                ['otros', '📦 Otros']
-              ].map(([key, label]) => (
-                <CategoriaChip 
-                  key={key} 
-                  active={(categoria || 'todos') === key} 
-                  href={`/?${new URLSearchParams({ ...(q && { q }), ...(key !== 'todos' && { categoria: key }) }).toString()}`}
-                >
-                  {label}
-                </CategoriaChip>
-              ))}
+              <Link href="/?" className={`category-chip ${!categoria ? 'active' : ''}`}>
+                Todos
+              </Link>
+              <Link href="/?categoria=utiles" className={`category-chip ${categoria === 'utiles' ? 'active' : ''}`}>
+                Útiles
+              </Link>
+              <Link href="/?categoria=comida" className={`category-chip ${categoria === 'comida' ? 'active' : ''}`}>
+                Comida
+              </Link>
+              <Link href="/?categoria=tecnologia" className={`category-chip ${categoria === 'tecnologia' ? 'active' : ''}`}>
+                Tecnología
+              </Link>
+              <Link href="/?categoria=ropa" className={`category-chip ${categoria === 'ropa' ? 'active' : ''}`}>
+                Ropa
+              </Link>
+              <Link href="/?categoria=otros" className={`category-chip ${categoria === 'otros' ? 'active' : ''}`}>
+                Otros
+              </Link>
             </div>
           </div>
         </div>

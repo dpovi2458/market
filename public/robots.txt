@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /producto/*
+Allow: /carrito
+Disallow: /api/
+Disallow: /vendedor/
+Disallow: /.next/
+Sitemap: https://market-facultad.vercel.app/sitemap.xml

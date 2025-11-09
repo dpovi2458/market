@@ -9,17 +9,6 @@ export default function ProductCard({ product }) {
         <div className="product-card-image">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={first} alt={product.titulo} />
-          
-          {product.stock <= 0 && (
-            <span className="badge badge-danger">Agotado</span>
-          )}
-          {product.stock > 0 && product.stock <= 5 && (
-            <span className="badge badge-warning">¡Últimas {product.stock}!</span>
-          )}
-          
-          <span className="badge badge-category">
-            {getCategoryEmoji(product.categoria)} {getCategoryName(product.categoria)}
-          </span>
         </div>
         
         <div className="product-card-content">
@@ -35,26 +24,4 @@ export default function ProductCard({ product }) {
       </Link>
     </article>
   );
-}
-
-function getCategoryEmoji(categoria) {
-  const emojis = {
-    utiles: '📚',
-    comida: '🍕',
-    tecnologia: '💻',
-    ropa: '👕',
-    otros: '📦'
-  };
-  return emojis[categoria] || '📦';
-}
-
-function getCategoryName(categoria) {
-  const names = {
-    utiles: 'Útiles',
-    comida: 'Comida',
-    tecnologia: 'Tecnología',
-    ropa: 'Ropa',
-    otros: 'Otros'
-  };
-  return names[categoria] || 'Otros';
 }

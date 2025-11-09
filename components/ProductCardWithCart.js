@@ -8,34 +8,29 @@ import { useCarrito } from '../context/CarritoContext';
  * Estructura de 3 partes: Contenedor Grid → Contenido → Acciones
  */
 export default function ProductCardWithCart({ product }) {
-  const { addItem } = useCarrito();
+  const { addItem, setOpen } = useCarrito();
   const [cantidad, setCantidad] = useState(1);
   const [adding, setAdding] = useState(false);
   
   const first = product.imagenes?.[0] || 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=60&auto=format&fit=crop';
   const canAdd = product.stock > 0;
   
-  async function handleAddToCart(e) {
+  function handleAddToCart(e) {
     e.preventDefault();
     if (!canAdd || adding) return;
-    
     setAdding(true);
-    try {
-      await addItem({
-        producto_id: product._id,
-        titulo: product.titulo,
-        precio: product.precio,
-        imagen: first,
-        stock: product.stock,
-        cantidad
-      });
-      // Reset cantidad después de agregar
-      setCantidad(1);
-    } catch (error) {
-      console.error('Error al agregar al carrito:', error);
-    } finally {
-      setAdding(false);
-    }
+    addItem({
+      producto_id: product._id,
+      titulo: product.titulo,
+      precio: product.precio,
+      imagen: first,
+      stock: product.stock,
+      cantidad
+    });
+    setCantidad(1);
+    setOpen(true);
+    // Pequeña ventana anti doble-click
+    setTimeout(() => setAdding(false), 300);
   }
   
   function handleIncrement(e) {
@@ -59,17 +54,6 @@ export default function ProductCardWithCart({ product }) {
         <div className="product-card-grid-image">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={first} alt={product.titulo} />
-          
-          {!canAdd && (
-            <span className="badge badge-danger">Agotado</span>
-          )}
-          {canAdd && product.stock <= 5 && (
-            <span className="badge badge-warning">¡Últimas {product.stock}!</span>
-          )}
-          
-          <span className="badge badge-category">
-            {getCategoryEmoji(product.categoria)} {getCategoryName(product.categoria)}
-          </span>
         </div>
       </Link>
 
@@ -139,26 +123,4 @@ export default function ProductCardWithCart({ product }) {
       </div>
     </article>
   );
-}
-
-function getCategoryEmoji(categoria) {
-  const emojis = {
-    utiles: '📚',
-    comida: '🍕',
-    tecnologia: '💻',
-    ropa: '👕',
-    otros: '📦'
-  };
-  return emojis[categoria] || '📦';
-}
-
-function getCategoryName(categoria) {
-  const names = {
-    utiles: 'Útiles',
-    comida: 'Comida',
-    tecnologia: 'Tecnología',
-    ropa: 'Ropa',
-    otros: 'Otros'
-  };
-  return names[categoria] || 'Otros';
 }
