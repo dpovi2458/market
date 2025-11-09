@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
-export const runtime = 'nodejs';
 import { getSellerFromCookie } from '../../../../lib/auth';
 import { cookies } from 'next/headers';
 
 export async function GET() {
-  const seller = getSellerFromCookie();
-  if (!seller) return NextResponse.json({ ok: false, error: 'No autorizado' }, { status: 401 });
-  return NextResponse.json({ ok: true, vendedor: seller });
+  try {
+    const seller = getSellerFromCookie();
+    if (!seller) return NextResponse.json({ ok: false }, { status: 401 });
+    return NextResponse.json({ ok: true, vendedor: seller });
+  } catch (error) {
+    return NextResponse.json({ ok: false }, { status: 401 });
+  }
 }
 
 export async function DELETE() {

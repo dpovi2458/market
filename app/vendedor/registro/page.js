@@ -150,8 +150,8 @@ export default function RegistroPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Crear Cuenta</h1>
-          <p className="text-base text-teal-600 font-semibold mb-1">Panel de Vendedor UNMSM</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">¡Bienvenido a Market Facultad!</h1>
+          <p className="text-base text-gray-600 mb-1">Ingresa tus datos para crear tu cuenta</p>
           <p className="text-sm text-gray-600">
             {step === 1 && 'Paso 1: Ingresa tu email institucional'}
             {step === 2 && 'Paso 2: Verifica tu código OTP'}
@@ -297,10 +297,29 @@ export default function RegistroPage() {
 
           {step === 3 && (
             <form onSubmit={handleCreateAccount} className="space-y-6">
-              <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Contraseña
-                </label>
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <p className="text-sm font-medium text-gray-700">Credenciales</p>
+                  <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-teal-900">{formData.email}</p>
+                        <p className="text-xs text-teal-700 mt-1">Correo institucional UNMSM verificado</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <p className="text-sm font-medium text-gray-700">Contraseña de acceso</p>
+                  <div className="space-y-3">
+                    <div>
+                      <label htmlFor="password" className="block text-xs font-medium text-gray-600 mb-2">
+                        Contraseña*
+                      </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,13 +338,13 @@ export default function RegistroPage() {
                     disabled={loading}
                     required
                   />
-                </div>
-              </div>
+                      </div>
+                    </div>
 
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Confirmar Contraseña
-                </label>
+                    <div>
+                      <label htmlFor="confirmPassword" className="block text-xs font-medium text-gray-600 mb-2">
+                        Confirmar contraseña*
+                      </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -344,6 +363,9 @@ export default function RegistroPage() {
                     disabled={loading}
                     required
                   />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -388,7 +410,10 @@ export default function RegistroPage() {
 
         <div className="mt-8 space-y-4">
           <div className="text-center">
-            <p className="text-sm text-gray-600 mb-2">
+            <p className="text-xs text-gray-500 mb-3">
+              ¡Recuerda! Debes usar tu correo institucional UNMSM para registrarte.
+            </p>
+            <p className="text-sm text-gray-600">
               ¿Ya tienes cuenta?{' '}
               <Link href="/vendedor/login" className="font-semibold text-teal-600 hover:text-teal-700 transition-colors">
                 Inicia sesión

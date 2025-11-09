@@ -21,7 +21,7 @@ export default async function Home({ searchParams }) {
             </h1>
             <p className="hero-subtitle">
               Market Facultad es tu marketplace para encontrar útiles, comida, tecnología y más. 
-              Hecho por estudiantes, para estudiantes de Ingeniería Industrial.
+              Hecho por estudiantes, para estudiantes de la Facultad de Ingeniería Industrial.
             </p>
             <div className="hero-ctas">
               <Link href="/?categoria=utiles" className="hero-btn hero-btn-primary">

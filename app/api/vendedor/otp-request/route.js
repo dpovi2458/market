@@ -67,7 +67,8 @@ export async function POST(req) {
     );
 
     // Enviar email con OTP (en desarrollo y producción)
-    const emailEnviado = await sendOTPEmail(emailLower, nuevoOTP);
+    const isPasswordReset = action === 'reset-password';
+    const emailEnviado = await sendOTPEmail(emailLower, nuevoOTP, isPasswordReset);
 
     if (!emailEnviado) {
       return NextResponse.json({ 

@@ -33,7 +33,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 text-center md:text-left max-w-md leading-relaxed text-sm md:text-base">
-              Compra y vende entre estudiantes de Ingeniería Industrial. Rápido, seguro y sin complicaciones.
+              Compra y vende entre estudiantes de la Facultad de Ingeniería Industrial . Rápido, seguro y sin complicaciones.
             </p>
           </div>
 
@@ -104,7 +104,7 @@ export default function Footer() {
 
               <div className="pt-4 border-t border-gray-700 w-full">
                 <p className="text-xs text-gray-500 text-center md:text-left">
-                  Soporte: Lunes - Viernes 8am - 5pm
+                  Soporte: Lunes - Viernes 8pm - 10pm
                 </p>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function Footer() {
                 © {currentYear} Market Facultad
               </p>
               <p className="text-gray-500 text-xs mt-1">
-                Ingeniería Industrial - UNMSM
+               Facultad de Ingeniería Industrial - UNMSM
               </p>
             </div>
             

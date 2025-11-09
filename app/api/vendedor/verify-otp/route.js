@@ -72,6 +72,8 @@ export async function POST(req) {
 
     // ✅ Código correcto
     verification.verificado = true;
+    // Extender expiración a 30 minutos para dar tiempo de completar el registro
+    verification.expira_en = new Date(Date.now() + 30 * 60 * 1000);
     await verification.save();
 
     return NextResponse.json({ 

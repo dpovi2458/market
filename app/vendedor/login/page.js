@@ -11,18 +11,16 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
+    let mounted = true;
     const checkSession = async () => {
       try {
         const res = await fetch('/api/vendedor/session');
-        if (res.ok) {
-          router.replace('/vendedor/dashboard');
-        }
-      } catch (e) {
-        // No hacer nada
-      }
+        if (res.ok && mounted) router.replace('/vendedor/dashboard');
+      } catch {}
     };
     checkSession();
-  }, [router]);
+    return () => { mounted = false; };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,9 +85,8 @@ export default function LoginPage() {
             </svg>
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Iniciar Sesión</h1>
-          <p className="text-base text-teal-600 font-semibold mb-1">Panel de Vendedor</p>
-          <p className="text-sm text-gray-600">Ingresa con tu correo institucional UNMSM</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">¡Hola de nuevo!</h1>
+          <p className="text-base text-gray-600">Accede a tu cuenta para seguir conectado</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8">
@@ -171,6 +168,12 @@ export default function LoginPage() {
               </div>
             </div>
 
+            <div className="flex justify-end">
+              <Link href="/vendedor/recuperar-acceso" className="text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
+
             <button
               type="submit"
               disabled={loading}
@@ -216,8 +219,8 @@ export default function LoginPage() {
           </div>
           
           <div className="text-center text-xs text-gray-500">
+            <p className="mb-2">¿Primera vez? Regístrate con tu correo institucional UNMSM (@unmsm.edu.pe)</p>
             <p>© 2025 Market Facultad UNMSM</p>
-            <p className="mt-1">Solo para estudiantes con correo institucional</p>
           </div>
         </div>
       </div>

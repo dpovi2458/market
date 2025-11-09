@@ -8,11 +8,13 @@ export default function VendedorLayout({ children }) {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const hideHeader = pathname?.startsWith('/vendedor/login');
+  const isPublicPage = pathname?.startsWith('/vendedor/login') || pathname?.startsWith('/vendedor/registro') || pathname?.startsWith('/vendedor/recuperar-acceso');
+  const hideHeader = isPublicPage;
 
   useEffect(() => {
+    let mounted = true;
+    
     const checkAuth = async () => {
-      // Si estamos en la página de login, no verificar autenticación
       if (hideHeader) {
         setIsLoading(false);
         return;
@@ -20,20 +22,23 @@ export default function VendedorLayout({ children }) {
 
       try {
         const res = await fetch('/api/vendedor/session', { credentials: 'include' });
+        if (!mounted) return;
+        
         if (res.ok) {
           setIsAuthenticated(true);
         } else {
           router.replace('/vendedor/login');
         }
       } catch (error) {
-        router.replace('/vendedor/login');
+        if (mounted) router.replace('/vendedor/login');
       } finally {
-        setIsLoading(false);
+        if (mounted) setIsLoading(false);
       }
     };
 
     checkAuth();
-  }, [pathname, hideHeader, router]);
+    return () => { mounted = false; };
+  }, [pathname, hideHeader]);
 
   // Loading state
   if (isLoading && !hideHeader) {

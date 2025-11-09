@@ -119,6 +119,7 @@ export default function ProductForm({ initial = {}, onSaved }) {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
+            <span className="absolute left-3 top-[38px] text-gray-500 font-medium z-10">S/</span>
             <Input 
               label="Precio*" 
               type="number" 
@@ -128,8 +129,8 @@ export default function ProductForm({ initial = {}, onSaved }) {
               onChange={(e) => setData({ ...data, precio: e.target.value })}
               placeholder="0.00"
               required
+              style={{ paddingLeft: '2.5rem' }}
             />
-            <span className="absolute right-3 top-9 text-gray-400 font-medium">$</span>
           </div>
           
           <label className="block">
