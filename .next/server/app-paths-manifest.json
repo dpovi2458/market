@@ -1,3 +1,8 @@
 {
-  "/vendedor/login/page": "app/vendedor/login/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/vendedor/session/route": "app/api/vendedor/session/route.js",
+  "/api/vendedor/login/route": "app/api/vendedor/login/route.js",
+  "/(tienda)/page": "app/(tienda)/page.js",
+  "/vendedor/login/page": "app/vendedor/login/page.js",
+  "/vendedor/registro/page": "app/vendedor/registro/page.js"
 }
