@@ -6,8 +6,13 @@ import { getSellerFromCookie } from '../../../../lib/auth';
 export async function GET() {
   const seller = getSellerFromCookie();
   if (!seller) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+  
   const Order = await OrderModel();
-  const items = await Order.find({ vendedor_id: seller.id }).sort({ fecha_pedido: -1 }).lean();
+  
+  // Si es usuario hardcoded de env, mostrar todos los pedidos
+  const query = seller.id === 'env-hardcoded' ? {} : { vendedor_id: seller.id };
+  
+  const items = await Order.find(query).sort({ fecha_pedido: -1 }).lean();
   return NextResponse.json({ items });
 }
 
