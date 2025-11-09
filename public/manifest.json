@@ -1,6 +1,6 @@
 {
-  "name": "Market Facultad",
-  "short_name": "MKT Facultad",
+  "name": "u-market",
+  "short_name": "u-market",
   "description": "Compra y venta entre estudiantes de Ingeniería Industrial",
   "start_url": "/",
   "scope": "/",

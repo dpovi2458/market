@@ -20,7 +20,7 @@ export default async function Home({ searchParams }) {
               Compra y vende entre estudiantes
             </h1>
             <p className="hero-subtitle">
-              Market Facultad es tu marketplace para encontrar útiles, comida, tecnología y más. 
+              u-market es tu marketplace para encontrar útiles, comida, tecnología y más. 
               Hecho por estudiantes, para estudiantes de la Facultad de Ingeniería Industrial.
             </p>
             <div className="hero-ctas">
@@ -41,7 +41,7 @@ export default async function Home({ searchParams }) {
           <div className="hero-graphic">
             <img 
               src="/hero-estudiantes fii.svg" 
-              alt="Estudiantes Market Facultad"
+              alt="Estudiantes u-market"
               className="hero-illustration"
               loading="lazy"
             />

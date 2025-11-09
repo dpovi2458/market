@@ -28,7 +28,7 @@ export default function Footer() {
                 <ShoppingCartIcon />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-white">Market Facultad</span>
+                <span className="text-2xl font-bold text-white">u-market</span>
                 <span className="text-xs text-teal-400 font-semibold">v1.0.0</span>
               </div>
             </Link>
@@ -116,7 +116,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             <div className="text-center md:text-left">
               <p className="text-gray-400 text-sm">
-                © {currentYear} Market Facultad
+                © {currentYear} u-market
               </p>
               <p className="text-gray-500 text-xs mt-1">
                Facultad de Ingeniería Industrial - UNMSM

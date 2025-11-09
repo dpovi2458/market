@@ -120,7 +120,7 @@ async function testResend() {
       console.log('  1. Revisa la bandeja de entrada de:', testEmail);
       console.log('  2. Revisa también la carpeta de SPAM');
       console.log('  3. Busca el código OTP:', testCode);
-      console.log('  4. El asunto es: "🔐 Código de Verificación - Market Facultad UNMSM"');
+      console.log('  4. El asunto es: "🔐 Código de Verificación - u-market UNMSM"');
       console.log('\n💡 TIP: Puedes ver las estadísticas en:');
       console.log('   https://resend.com/emails');
       console.log('');

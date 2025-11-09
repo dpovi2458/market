@@ -220,7 +220,7 @@ export default function LoginPage() {
           
           <div className="text-center text-xs text-gray-500">
             <p className="mb-2">¿Primera vez? Regístrate con tu correo institucional UNMSM (@unmsm.edu.pe)</p>
-            <p>© 2025 Market Facultad UNMSM</p>
+            <p>© 2025 u-market UNMSM</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-# Marketplace Facultad Industrial (MVP)
+# u-market (MVP)
 
 Marketplace simple para compra/venta entre estudiantes de Ingeniería Industrial.
 

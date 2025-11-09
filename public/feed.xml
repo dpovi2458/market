@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Market Facultad - Productos Recientes</title>
+    <title>u-market - Productos Recientes</title>
     <link>https://market-facultad.vercel.app</link>
     <description>Marketplace de compra y venta entre estudiantes</description>
     <language>es-pe</language>

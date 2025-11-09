@@ -57,7 +57,7 @@ export default function MarketHeader() {
               <ShoppingCartIcon />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-teal-700 to-teal-600 bg-clip-text text-transparent hidden sm:inline">
-              Market Facultad
+              u-market
             </span>
           </Link>
 

@@ -150,7 +150,7 @@ export default function RegistroPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">¡Bienvenido a Market Facultad!</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">¡Bienvenido a u-market!</h1>
           <p className="text-base text-gray-600 mb-1">Ingresa tus datos para crear tu cuenta</p>
           <p className="text-sm text-gray-600">
             {step === 1 && 'Paso 1: Ingresa tu email institucional'}
@@ -431,7 +431,7 @@ export default function RegistroPage() {
           </div>
           
           <div className="text-center text-xs text-gray-500">
-            <p>© 2025 Market Facultad UNMSM</p>
+            <p>© 2025 u-market UNMSM</p>
             <p className="mt-1">Registro seguro con verificación OTP</p>
           </div>
         </div>

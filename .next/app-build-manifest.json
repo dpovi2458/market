@@ -1,26 +1,5 @@
 {
   "pages": {
-    "/vendedor/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/login/page.js"
-    ],
-    "/vendedor/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/layout.js"
-    ],
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
-    ],
-    "/vendedor/registro/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/registro/page.js"
-    ],
     "/(tienda)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -31,45 +10,21 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(tienda)/layout.js"
     ],
-    "/vendedor/dashboard/page": [
+    "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/dashboard/page.js"
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
-    "/vendedor/recuperar-acceso/page": [
+    "/vendedor/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/recuperar-acceso/page.js"
+      "static/chunks/app/vendedor/login/page.js"
     ],
-    "/vendedor/productos/page": [
+    "/vendedor/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/productos/page.js"
-    ],
-    "/vendedor/pedidos/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/pedidos/page.js"
-    ],
-    "/vendedor/productos/nuevo/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/productos/nuevo/page.js"
-    ],
-    "/vendedor/productos/editar/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/vendedor/productos/editar/[id]/page.js"
-    ],
-    "/(tienda)/producto/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(tienda)/producto/[id]/page.js"
-    ],
-    "/(tienda)/carrito/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(tienda)/carrito/page.js"
+      "static/chunks/app/vendedor/layout.js"
     ]
   }
 }

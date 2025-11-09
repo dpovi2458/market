@@ -33,7 +33,7 @@ export default function VendedorHeader() {
               </svg>
             </div>
             <div>
-              <div className="text-xl md:text-2xl font-bold text-gray-900">Market Facultad</div>
+              <div className="text-xl md:text-2xl font-bold text-gray-900">u-market</div>
               <div className="text-xs text-teal-600 font-semibold">Panel Vendedor</div>
             </div>
           </Link>

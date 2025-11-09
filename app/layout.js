@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <head>
-        <title>Market Facultad - Compra y Vende Entre Estudiantes</title>
+        <title>u-market - Compra y Vende Entre Estudiantes</title>
         <meta name="description" content="Marketplace de compra y venta entre estudiantes de Ingeniería Industrial" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
