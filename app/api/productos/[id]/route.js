@@ -17,7 +17,8 @@ const productUpdate = z.object({
   categoria: z.enum(['utiles', 'comida', 'tecnologia', 'ropa', 'otros']).optional(),
   imagenes: z.array(z.string().url()).max(3).optional(),
   stock: z.number().int().min(0).optional(),
-  disponible: z.boolean().optional()
+  disponible: z.boolean().optional(),
+  contacto: z.string().max(200).optional()
 });
 
 export async function PUT(req, { params }) {

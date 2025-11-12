@@ -34,6 +34,12 @@ export default async function ProductDetail({ params }) {
           <div className="vendor-section">
             <div className="vendor-label">Vendedor</div>
             <div className="vendor-name">{json.vendedor_nombre || 'Estudiante'}</div>
+            {json.contacto && (
+              <div className="mt-2">
+                <div className="vendor-label">Contacto</div>
+                <div className="vendor-name text-primary">{json.contacto}</div>
+              </div>
+            )}
           </div>
           <AddToCart product={json} />
         </div>

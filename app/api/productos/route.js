@@ -32,7 +32,8 @@ const productSchema = z.object({
   stock: z.number().int().min(0),
   disponible: z.boolean().optional().default(true),
   vendedor_id: z.string().optional(),
-  vendedor_nombre: z.string().optional()
+  vendedor_nombre: z.string().optional(),
+  contacto: z.string().max(200).optional()
 });
 
 export async function POST(req) {

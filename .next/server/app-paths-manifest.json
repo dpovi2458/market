@@ -1,5 +1,11 @@
 {
   "/api/vendedor/session/route": "app/api/vendedor/session/route.js",
+  "/api/productos/[id]/route": "app/api/productos/[id]/route.js",
+  "/api/vendedor/productos/route": "app/api/vendedor/productos/route.js",
+  "/vendedor/login/page": "app/vendedor/login/page.js",
+  "/(tienda)/producto/[id]/page": "app/(tienda)/producto/[id]/page.js",
   "/(tienda)/page": "app/(tienda)/page.js",
-  "/vendedor/login/page": "app/vendedor/login/page.js"
+  "/vendedor/dashboard/page": "app/vendedor/dashboard/page.js",
+  "/vendedor/productos/page": "app/vendedor/productos/page.js",
+  "/vendedor/productos/editar/[id]/page": "app/vendedor/productos/editar/[id]/page.js"
 }

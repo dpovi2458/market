@@ -13,6 +13,7 @@ export default function ProductForm({ initial = {}, onSaved }) {
     stock: 0,
     disponible: true,
     imagenes: [],
+    contacto: '',
     ...initial
   });
   const [loading, setLoading] = useState(false);
@@ -87,6 +88,14 @@ export default function ProductForm({ initial = {}, onSaved }) {
           onChange={(e) => setData({ ...data, titulo: e.target.value })}
           placeholder="Ej: Calculadora científica Casio FX-991"
           required
+        />
+        
+        <Input 
+          label="Contacto (WhatsApp, Telegram, etc.)" 
+          value={data.contacto} 
+          onChange={(e) => setData({ ...data, contacto: e.target.value })}
+          placeholder="Ej: WhatsApp 987654321, @usuario_telegram"
+          maxLength={200}
         />
         
         <label className="block">

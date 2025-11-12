@@ -1552,6 +1552,11 @@ html {
   color: var(--text-primary);
 }
 
+.vendor-name.text-primary {
+  color: var(--primary);
+  font-size: 16px;
+}
+
 .quantity-section {
   display: flex;
   align-items: center;
